@@ -1,6 +1,9 @@
 #include <iostream>
+#include "plugins/mylibrary.h"
+#include "components/Calculator.h"
 
 int main() {
-    std::cout << "Hello, World!" << std::endl;
+    Calculator calculator;
+    calculator.start();
     return 0;
 }
