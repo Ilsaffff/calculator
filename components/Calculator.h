@@ -2,6 +2,7 @@
 #define CALCULATOR_CALCULATOR_H
 #include "ExpressionParser.h"
 #include "Processor.h"
+#include "LoaderLibrary.h"
 
 class Calculator{
 public:

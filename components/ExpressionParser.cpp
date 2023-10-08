@@ -85,5 +85,6 @@ void ExpressionParser::readFunction(std::string &expression, std::stack<std::str
 int ExpressionParser::getPriority(std::string &operator_) {
     if (operator_ == "+" || operator_ == "-") return 1;
     else if (operator_ == "*" || operator_ == "/") return 2;
+    else if (operator_ == "^") return 3;
     return 0;
 }
