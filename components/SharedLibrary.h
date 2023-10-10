@@ -16,7 +16,7 @@ public:
 
     std::string name;
 
-    ~SharedLibrary();
+//    ~SharedLibrary();
 
 private:
     void *handler;

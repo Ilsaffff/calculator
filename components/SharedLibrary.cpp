@@ -4,7 +4,7 @@
 void SharedLibrary::loadLibrary(const std::string &nameLibrary) {
     std::string filePath;
     std::stringstream ss;
-    ss << "/home/ilsaf/CLionProjects/calculator/plugins/" << nameLibrary << "/liblib" << nameLibrary
+    ss << "../plugins/" << nameLibrary << "/liblib" << nameLibrary
        << ".so";
     filePath = ss.str();
     void *libraryHandler = dlopen(filePath.c_str(),
@@ -49,9 +49,9 @@ double SharedLibrary::runFunc(std::string name,
     }
     return function(value1, value2);
 }
-
-SharedLibrary::~SharedLibrary() {
-    if (handler) {
-        dlclose(handler);
-    }
-}
+//
+//SharedLibrary::~SharedLibrary() {
+//    if (handler) {
+//        dlclose(handler);
+//    }
+//}
