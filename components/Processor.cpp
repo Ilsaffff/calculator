@@ -15,11 +15,8 @@ double Processor::process(std::stack<double> &numbers, std::stack<std::string> &
     std::string operator_ = operators.top();
     operators.pop();
     if (operator_ == "sin" || operator_ == "cos" || operator_ == "ln") {
-        if (operator_ == "ln" && num1 <= 0) {
-            throw std::runtime_error("Аргумент логарифма не может быть меньше 0");
-        }
         SharedLibrary currentLibrary = loaderLibrary.getLibrary(operator_);
-        result = currentLibrary.runFunc(operator_, num1);
+        result = currentLibrary.runFunc(num1);
     } else {
         num2 = numbers.top();
         numbers.pop();
@@ -37,7 +34,7 @@ double Processor::process(std::stack<double> &numbers, std::stack<std::string> &
         } else if (operator_ == "^") {
 
             SharedLibrary currentLibrary = loaderLibrary.getLibrary("pow");
-            result = currentLibrary.runFunc("pow", num2, num1);
+            result = currentLibrary.runFunc(num2, num1);
         }
     }
     numbers.push(result);

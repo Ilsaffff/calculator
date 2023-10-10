@@ -4,10 +4,9 @@
 void SharedLibrary::loadLibrary(const std::string &nameLibrary) {
     std::string filePath;
     std::stringstream ss;
-    ss << "../plugins/" << "/liblib" << nameLibrary << ".so";
+    ss << "../plugins/" << "/lib" << nameLibrary << ".so";
     filePath = ss.str();
-    void *libraryHandler = dlopen(filePath.c_str(),
-                                  RTLD_LAZY);
+    void *libraryHandler = dlopen(filePath.c_str(), RTLD_LAZY);
 
     if (!libraryHandler) {
         std::string errorMessage;
@@ -20,28 +19,19 @@ void SharedLibrary::loadLibrary(const std::string &nameLibrary) {
     handler = libraryHandler;
 }
 
-double SharedLibrary::runFunc(std::string nameFunc, const double &value) {
-    nameFunc[0] = std::toupper(nameFunc[0]);
-    std::string nameFuncLib;
-    std::stringstream ss;
-    ss << "func" << nameFunc;
-    nameFuncLib = ss.str();
+double SharedLibrary::runFunc(const double &value) {
 
-    double (*function)(double) = (double (*)(double)) dlsym(this->handler, nameFuncLib.c_str());
+    double (*function)(double) = (double (*)(double)) dlsym(this->handler, "func");
     if (!function) {
         throw std::runtime_error("Данная функция не была найдена в библиотеке!");
     }
     return function(value);
 }
 
-double SharedLibrary::runFunc(std::string name, const double &value1, const double &value2) {
-    name[0] = std::toupper(name[0]);
-    std::string nameFunc;
-    std::stringstream ss;
-    ss << "func" << name;
-    nameFunc = ss.str();
+double SharedLibrary::runFunc(const double &value1, const double &value2) {
+
     double (*function)(double, double) = (double (*)(double, double)) dlsym(this->handler,
-                                                                            nameFunc.c_str());
+                                                                            "func");
     if (!function) {
         throw std::runtime_error("Данная функция не была найдена в библиотеке!");
     }
