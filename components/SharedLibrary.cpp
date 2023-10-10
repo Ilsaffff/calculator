@@ -4,7 +4,7 @@
 void SharedLibrary::loadLibrary(const std::string &nameLibrary) {
     std::string filePath;
     std::stringstream ss;
-    ss << "../plugins/" << nameLibrary << "/liblib" << nameLibrary
+    ss << "../plugins/" << "/liblib" << nameLibrary
        << ".so";
     filePath = ss.str();
     void *libraryHandler = dlopen(filePath.c_str(),
