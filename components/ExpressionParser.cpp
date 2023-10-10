@@ -15,7 +15,7 @@ double ExpressionParser::parse(std::string &expression, Processor &processor) {
         if (expression[i] == ' ') {
             i++;
             continue;
-        } else if (isdigit(expression[i]) || expression[i] == '-') {
+        } else if (isdigit(expression[i])) {
             readNumber(expression, numbers, i);
         } else if (validSimpleFunctions.count(element)) {
             while (!operators.empty()) {
@@ -58,7 +58,7 @@ double ExpressionParser::parse(std::string &expression, Processor &processor) {
 
 void ExpressionParser::readNumber(std::string &expression, std::stack<double> &numbers, size_t &i) {
     std::string num;
-    while (i < expression.size() && (isdigit(expression[i]) || expression[i] == '-') &&
+    while (i < expression.size() && isdigit(expression[i]) &&
            expression[i] != ' ') {
         num += expression[i];
         i++;
