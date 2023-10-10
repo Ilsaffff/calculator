@@ -1,5 +1,4 @@
-#ifndef CALCULATOR_CALCULATOR_H
-#define CALCULATOR_CALCULATOR_H
+#pragma once
 #include "ExpressionParser.h"
 #include "Processor.h"
 #include "LoaderLibrary.h"
@@ -13,4 +12,4 @@ private:
     Processor processor;
 };
 
-#endif //CALCULATOR_CALCULATOR_H
+

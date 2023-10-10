@@ -1,6 +1,3 @@
-#include <iostream>
-#include <map>
-
 #include "Processor.h"
 
 
@@ -21,8 +18,7 @@ double Processor::process(std::stack<double> &numbers, std::stack<std::string> &
         if (operator_ == "ln" && num1 <= 0) {
             throw std::runtime_error("Аргумент логарифма не может быть меньше 0");
         }
-        SharedLibrary currentLibrary;
-        currentLibrary = loaderLibrary.getLibrary(operator_);
+        SharedLibrary currentLibrary = loaderLibrary.getLibrary(operator_);
         result = currentLibrary.runFunc(operator_, num1);
     } else {
         num2 = numbers.top();
@@ -39,8 +35,8 @@ double Processor::process(std::stack<double> &numbers, std::stack<std::string> &
             }
             result = num2 / num1;
         } else if (operator_ == "^") {
-            SharedLibrary currentLibrary;
-            currentLibrary = loaderLibrary.getLibrary("pow");
+
+            SharedLibrary currentLibrary = loaderLibrary.getLibrary("pow");
             result = currentLibrary.runFunc("pow", num2, num1);
         }
     }

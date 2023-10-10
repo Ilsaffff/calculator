@@ -4,8 +4,7 @@
 void SharedLibrary::loadLibrary(const std::string &nameLibrary) {
     std::string filePath;
     std::stringstream ss;
-    ss << "../plugins/" << "/liblib" << nameLibrary
-       << ".so";
+    ss << "../plugins/" << "/liblib" << nameLibrary << ".so";
     filePath = ss.str();
     void *libraryHandler = dlopen(filePath.c_str(),
                                   RTLD_LAZY);
@@ -17,26 +16,25 @@ void SharedLibrary::loadLibrary(const std::string &nameLibrary) {
         throw std::runtime_error(errorMessage.c_str());
     }
     std::cout << "Загружена SharedLibrary по имени " << nameLibrary << "\n";
-    this->name = nameLibrary;
-    this->handler = libraryHandler;
+    name = nameLibrary;
+    handler = libraryHandler;
 }
 
-double SharedLibrary::runFunc(std::string name, const double &value) {
-    name[0] = std::toupper(name[0]);
-    std::string nameFunc;
+double SharedLibrary::runFunc(std::string nameFunc, const double &value) {
+    nameFunc[0] = std::toupper(nameFunc[0]);
+    std::string nameFuncLib;
     std::stringstream ss;
-    ss << "func" << name;
-    nameFunc = ss.str();
+    ss << "func" << nameFunc;
+    nameFuncLib = ss.str();
 
-    double (*function)(double) = (double (*)(double)) dlsym(this->handler, nameFunc.c_str());
+    double (*function)(double) = (double (*)(double)) dlsym(this->handler, nameFuncLib.c_str());
     if (!function) {
         throw std::runtime_error("Данная функция не была найдена в библиотеке!");
     }
     return function(value);
 }
 
-double SharedLibrary::runFunc(std::string name,
-                              const double &value1, const double &value2) {
+double SharedLibrary::runFunc(std::string name, const double &value1, const double &value2) {
     name[0] = std::toupper(name[0]);
     std::string nameFunc;
     std::stringstream ss;
@@ -49,9 +47,7 @@ double SharedLibrary::runFunc(std::string name,
     }
     return function(value1, value2);
 }
-//
-//SharedLibrary::~SharedLibrary() {
-//    if (handler) {
-//        dlclose(handler);
-//    }
-//}
+
+void SharedLibrary::closeLib() {
+    dlclose(handler);
+}

@@ -1,6 +1,4 @@
-#ifndef CALCULATOR_EXPRESSIONPARSER_H
-#define CALCULATOR_EXPRESSIONPARSER_H
-
+#pragma once
 #include <string>
 #include <set>
 #include "ExpressionParser.h"
@@ -16,4 +14,4 @@ private:
     void readFunction(std::string &expression, std::stack<std::string> & operators, size_t &i);
     int getPriority(std::string &operator2);
 };
-#endif //CALCULATOR_EXPRESSIONPARSER_H
+#pragma once

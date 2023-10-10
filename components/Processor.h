@@ -1,9 +1,10 @@
-
-#ifndef CALCULATOR_PROCESSOR_H
-#define CALCULATOR_PROCESSOR_H
+#pragma once
 #include "stack"
 #include "string"
 #include "LoaderLibrary.h"
+#include <iostream>
+#include <map>
+
 
 class Processor{
 public:
@@ -13,4 +14,3 @@ private:
     LoaderLibrary loaderLibrary;
 };
 
-#endif //CALCULATOR_PROCESSOR_H
