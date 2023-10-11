@@ -16,7 +16,7 @@ double ExpressionParser::parse(std::string &expression, Processor &processor) {
             i++;
             continue;
         } else if (isdigit(expression[i])) {
-            readNumber(expression, numbers, i);
+            numbers.push(readNumber(expression, i));
         } else if (validSimpleFunctions.count(element)) {
             while (!operators.empty()) {
                 if (getPriority(operators.top()) >= getPriority(element)) {
@@ -44,7 +44,7 @@ double ExpressionParser::parse(std::string &expression, Processor &processor) {
             operators.pop();
             i++;
         } else if (!isdigit(expression[i])) {
-            readFunction(expression, operators, i);
+            operators.push(readFunction(expression, i));
         } else {
             throw std::runtime_error("Вы ввели невалидное выражение");
         }
@@ -56,30 +56,29 @@ double ExpressionParser::parse(std::string &expression, Processor &processor) {
     return numbers.top();
 }
 
-void ExpressionParser::readNumber(std::string &expression, std::stack<double> &numbers, size_t &i) {
+double ExpressionParser::readNumber(std::string &expression, size_t &i) {
     std::string num;
     while (i < expression.size() && isdigit(expression[i]) &&
            expression[i] != ' ') {
         num += expression[i];
         i++;
     }
-    numbers.push(std::stod(num));
+    return std::stod(num);
 }
 
-void ExpressionParser::readFunction(std::string &expression, std::stack<std::string> &operators,
-                                    size_t &i) {
+std::string ExpressionParser::readFunction(std::string &expression, size_t &i) {
     std::string func;
     while (i < expression.size() && isalpha(expression[i]) && expression[i] != ' ') {
         func += expression[i];
         i++;
     }
-    if (validFunctions.count(func) != 0) {
-        operators.push(func);
-    } else {
-        throw std::runtime_error("Вы ввели некорректную функцию");
-    }
     if (expression[i] == '(') {
         i++;
+    }
+    if (validFunctions.count(func) != 0) {
+        return func;
+    } else {
+        throw std::runtime_error("Вы ввели некорректную функцию");
     }
 }
 
