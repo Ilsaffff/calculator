@@ -1,6 +1,10 @@
-#include <iostream>
+#include "components/Calculator.h"
+#include "dlfcn.h"
+#include "iostream"
+
 
 int main() {
-    std::cout << "Hello, World!" << std::endl;
+    Calculator calculator;
+    calculator.start();
     return 0;
 }
